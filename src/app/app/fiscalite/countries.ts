@@ -1,18 +1,35 @@
 // Pays, provinces et devises proposés dans Fiscalité et Réglages (codes ISO ; noms via Intl côté serveur).
 
+// Tous les pays et territoires (ISO 3166-1), triés par nom à l'affichage.
 export const COUNTRY_CODES = [
-  "CA", "US", "MX", "FR", "BE", "CH", "LU", "MC", "GB", "IE", "DE", "AT", "NL", "ES", "PT", "IT", "PL", "RO",
-  "SE", "NO", "DK", "FI", "GR", "TR", "MA", "DZ", "TN", "SN", "CI", "CM", "CD", "NG", "ZA", "EG", "AE", "IL",
-  "IN", "CN", "JP", "KR", "VN", "PH", "AU", "NZ", "BR", "AR", "CL", "CO", "PE", "HT",
+  "AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AQ", "AR", "AS", "AT", "AU", "AW", "AX", "AZ", "BA", "BB",
+  "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BL", "BM", "BN", "BO", "BQ", "BR", "BS", "BT", "BV", "BW", "BY",
+  "BZ", "CA", "CC", "CD", "CF", "CG", "CH", "CI", "CK", "CL", "CM", "CN", "CO", "CR", "CU", "CV", "CW", "CX",
+  "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "EH", "ER", "ES", "ET", "FI", "FJ", "FK",
+  "FM", "FO", "FR", "GA", "GB", "GD", "GE", "GF", "GG", "GH", "GI", "GL", "GM", "GN", "GP", "GQ", "GR", "GS",
+  "GT", "GU", "GW", "GY", "HK", "HM", "HN", "HR", "HT", "HU", "ID", "IE", "IL", "IM", "IN", "IO", "IQ", "IR",
+  "IS", "IT", "JE", "JM", "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KP", "KR", "KW", "KY", "KZ", "LA",
+  "LB", "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "LY", "MA", "MC", "MD", "ME", "MF", "MG", "MH", "MK",
+  "ML", "MM", "MN", "MO", "MP", "MQ", "MR", "MS", "MT", "MU", "MV", "MW", "MX", "MY", "MZ", "NA", "NC", "NE",
+  "NF", "NG", "NI", "NL", "NO", "NP", "NR", "NU", "NZ", "OM", "PA", "PE", "PF", "PG", "PH", "PK", "PL", "PM",
+  "PN", "PR", "PS", "PT", "PW", "PY", "QA", "RE", "RO", "RS", "RU", "RW", "SA", "SB", "SC", "SD", "SE", "SG",
+  "SH", "SI", "SJ", "SK", "SL", "SM", "SN", "SO", "SR", "SS", "ST", "SV", "SX", "SY", "SZ", "TC", "TD", "TF",
+  "TG", "TH", "TJ", "TK", "TL", "TM", "TN", "TO", "TR", "TT", "TV", "TW", "TZ", "UA", "UG", "UM", "US", "UY",
+  "UZ", "VA", "VC", "VE", "VG", "VI", "VN", "VU", "WF", "WS", "XK", "YE", "YT", "ZA", "ZM", "ZW",
 ] as const;
 
 export const CA_PROVINCES = ["QC", "ON", "BC", "AB", "MB", "SK", "NS", "NB", "NL", "PE", "YT", "NT", "NU"] as const;
 
-export const CURRENCIES = [
-  "CAD", "USD", "EUR", "GBP", "CHF", "MXN", "BRL", "MAD", "XOF", "XAF", "HTG", "JPY", "CNY", "INR", "AUD", "NZD",
-  "SEK", "NOK", "DKK", "PLN", "RON", "TRY", "DZD", "TND", "NGN", "ZAR", "EGP", "AED", "ILS", "KRW", "VND", "PHP",
-  "ARS", "CLP", "COP", "PEN",
-] as const;
+// Toutes les devises connues du moteur JavaScript (ISO 4217), les plus courantes en tête.
+const COMMON_CURRENCIES = ["CAD", "USD", "EUR", "GBP", "CHF", "MXN", "BRL", "MAD", "XOF", "XAF", "HTG", "JPY", "CNY", "INR", "AUD"];
+const ALL_CURRENCIES: string[] = (() => {
+  try {
+    return (Intl as unknown as { supportedValuesOf(k: string): string[] }).supportedValuesOf("currency");
+  } catch {
+    return [];
+  }
+})();
+export const CURRENCIES: readonly string[] = [...COMMON_CURRENCIES, ...ALL_CURRENCIES.filter((c) => !COMMON_CURRENCIES.includes(c))];
 
 export const OTHER_COUNTRY = "__other";
 

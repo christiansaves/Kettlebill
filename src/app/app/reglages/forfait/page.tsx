@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { requireContext, spaceOwnerPlan } from "@/lib/session";
@@ -79,6 +80,9 @@ export default async function ForfaitPage({ searchParams }: PageProps<"/app/regl
   const locale = intlLocale(ctx.locale, ctx.profile.country);
   const statut = typeof sp.statut === "string" ? sp.statut : undefined;
   const stripeReady = isConfigured.stripe();
+  // Dans les apps iPhone/Android, Apple et Google exigent leur propre système de paiement :
+  // on n'y affiche donc pas l'achat par Stripe (voir mobile/STORES.md).
+  const inNativeApp = /KettlebillApp-(iOS|Android)/.test((await headers()).get("user-agent") ?? "");
   const billing = ctx.billing;
 
   // --- Utilisation -------------------------------------------------------------------------------
@@ -200,7 +204,7 @@ export default async function ForfaitPage({ searchParams }: PageProps<"/app/regl
           {status === "paused" ? <Notice tone="neutral">{t("current.paused")}</Notice> : null}
           {status === "canceled" || status === "incomplete_expired" ? <Notice tone="neutral">{t("current.canceled")}</Notice> : null}
 
-          {hasCustomer && stripeReady ? (
+          {hasCustomer && stripeReady && !inNativeApp ? (
             <div className="flex flex-col gap-1.5">
               <PortalButton
                 label={status === "past_due" || status === "unpaid" || status === "incomplete" ? t("portal.updatePayment") : t("portal.button")}
@@ -241,6 +245,9 @@ export default async function ForfaitPage({ searchParams }: PageProps<"/app/regl
       <section>
         <SectionTitle>{t("plans.title")}</SectionTitle>
         {live && shownPlan !== "free" ? <p className="mb-3 text-sm text-muted">{t("plans.switchNote")}</p> : null}
+        {inNativeApp ? (
+          <Notice tone="accent">{t("plans.nativeAppNote")}</Notice>
+        ) : (
         <PlanPicker
           messages={messages}
           plans={plans}
@@ -253,6 +260,7 @@ export default async function ForfaitPage({ searchParams }: PageProps<"/app/regl
           monthsFree={monthsFree}
           stripeReady={stripeReady}
         />
+        )}
         <p className="mt-4 text-center text-xs text-muted">{t("plans.secure")}</p>
       </section>
     </div>

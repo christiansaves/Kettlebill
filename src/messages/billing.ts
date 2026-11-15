@@ -1,5 +1,6 @@
 // Textes du module « billing ». fr = source (obligatoire), en = traduction anglaise.
 const fr = {
+  "plans.nativeAppNote": "Le changement de forfait n'est pas encore offert dans l'application mobile. Ton forfait actuel et tes limites restent affichés ci-dessus.",
   "title": "Forfait et facturation",
   "description": "Ton forfait, ton utilisation et tes paiements, au même endroit.",
 
@@ -110,6 +111,7 @@ const fr = {
   "error.noCustomer": "Aucun compte de facturation pour l'instant. Choisis d'abord un forfait.",
 };
 const en: Partial<Record<keyof typeof fr, string>> = {
+  "plans.nativeAppNote": "Changing plans isn't available in the mobile app yet. Your current plan and limits are shown above.",
   "title": "Plan & billing",
   "description": "Your plan, your usage and your payments, all in one place.",
 
