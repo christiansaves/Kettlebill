@@ -1,0 +1,30 @@
+/** Symbole Kettlebill : bouilloire + crochet doré (vapeur). */
+export function LogoMark({ size = 32, className = "" }: { size?: number; className?: string }) {
+  return (
+    <svg viewBox="0 0 64 64" width={size} height={size} aria-hidden="true" className={className}>
+      <rect width="64" height="64" rx="16" fill="var(--accent)" />
+      <path d="M38 17.5l3.5 3.5L51 11" fill="none" stroke="#F4B860" strokeWidth="3.6" strokeLinecap="round" strokeLinejoin="round" />
+      <rect x="28.5" y="22" width="7" height="5" rx="2" fill="var(--accent-ink)" />
+      <path
+        d="M25 27h14c2.4 0 4.3 1.6 4.8 3.9l3 15.3c.6 3-1.7 5.8-4.8 5.8H22c-3.1 0-5.4-2.8-4.8-5.8l3-15.3c.5-2.3 2.4-3.9 4.8-3.9z"
+        fill="var(--accent-ink)"
+      />
+      <path d="M20.8 35.5l-8.3-5.8c-1.3-.9-3 .3-2.6 1.8l1.5 5.2c.3 1 1 1.8 2 2.2l6.4 2.6z" fill="var(--accent-ink)" />
+      <path
+        d="M44.6 33.5c4.7-.6 8.2 2.6 7.6 7.2-.4 3.1-2.8 5.4-5.7 6.1l-.7-3.6c1.5-.4 2.6-1.6 2.8-3.1.3-2.3-1.5-3.8-3.3-3.4z"
+        fill="var(--accent-ink)"
+      />
+    </svg>
+  );
+}
+
+export function Logo({ size = 32 }: { size?: number }) {
+  return (
+    <span className="inline-flex items-center gap-2.5">
+      <LogoMark size={size} />
+      <span className="font-display text-xl font-bold tracking-tight text-ink" style={{ fontSize: size * 0.68 }}>
+        kettlebill
+      </span>
+    </span>
+  );
+}

@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/* Kettlebill — jetons de couleur (clair par défaut, sombre via le système ou le choix de l'utilisateur). */
+:root {
+  --bg: #f3f6f7;
+  --surface: #ffffff;
+  --surface-2: #f8fafa;
+  --ink: #10222b;
+  --muted: #56676f;
+  --line: #d8e1e4;
+  --accent: #0e6b6b;
+  --accent-ink: #ffffff;
+  --soft: #e1efef;
+  --gold: #c98a1b;
+  --warn: #9a4a06;
+  --warn-bg: #fcefd8;
+  --bad: #b42318;
+  --bad-bg: #fde8e6;
+  --good: #17703f;
+  --good-bg: #e0f3e8;
+  --scrim: rgba(16, 34, 43, 0.55);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1418;
+    --surface: #132026;
+    --surface-2: #17262d;
+    --ink: #e5eef0;
+    --muted: #8fa3ab;
+    --line: #243940;
+    --accent: #4dc2c2;
+    --accent-ink: #05181a;
+    --soft: #173136;
+    --gold: #f4b860;
+    --warn: #f0b056;
+    --warn-bg: #2e2411;
+    --bad: #f2776c;
+    --bad-bg: #3a1714;
+    --good: #5ed39a;
+    --good-bg: #123223;
+    --scrim: rgba(0, 0, 0, 0.7);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1418;
+  --surface: #132026;
+  --surface-2: #17262d;
+  --ink: #e5eef0;
+  --muted: #8fa3ab;
+  --line: #243940;
+  --accent: #4dc2c2;
+  --accent-ink: #05181a;
+  --soft: #173136;
+  --gold: #f4b860;
+  --warn: #f0b056;
+  --warn-bg: #2e2411;
+  --bad: #f2776c;
+  --bad-bg: #3a1714;
+  --good: #5ed39a;
+  --good-bg: #123223;
+  --scrim: rgba(0, 0, 0, 0.7);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-soft: var(--soft);
+  --color-gold: var(--gold);
+  --color-warn: var(--warn);
+  --color-warn-bg: var(--warn-bg);
+  --color-bad: var(--bad);
+  --color-bad-bg: var(--bad-bg);
+  --color-good: var(--good);
+  --color-good-bg: var(--good-bg);
+  --font-sans: var(--font-body), system-ui, sans-serif;
+  --font-display: var(--font-display), system-ui, sans-serif;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
