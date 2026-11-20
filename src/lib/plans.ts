@@ -10,6 +10,7 @@ export interface PlanLimits {
   lettersPerMonth: number;
   fiscalPerMonth: number; // estimations fiscales IA par mois
   aiLettersPerMonth: number; // lettres rédigées par l'IA par mois
+  scansPerMonth: number; // photos de reçus/factures lues par l'IA par mois
   spaces: number; // espaces en plus de l'espace personnel
   membersPerSpace: number;
   emailReminders: boolean;
@@ -33,6 +34,7 @@ export const PLANS: Record<PlanId, Plan> = {
       lettersPerMonth: 1,
       fiscalPerMonth: 1,
       aiLettersPerMonth: 0,
+      scansPerMonth: 10,
       spaces: 0,
       membersPerSpace: 1,
       emailReminders: true,
@@ -47,6 +49,7 @@ export const PLANS: Record<PlanId, Plan> = {
       lettersPerMonth: UNLIMITED,
       fiscalPerMonth: 10,
       aiLettersPerMonth: 10,
+      scansPerMonth: 150,
       spaces: 1,
       membersPerSpace: 2,
       emailReminders: true,
@@ -61,6 +64,7 @@ export const PLANS: Record<PlanId, Plan> = {
       lettersPerMonth: UNLIMITED,
       fiscalPerMonth: 30,
       aiLettersPerMonth: 30,
+      scansPerMonth: 400,
       spaces: 5,
       membersPerSpace: 6,
       emailReminders: true,

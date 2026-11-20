@@ -21,6 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const FEATURES: { key: string; icon: IconName }[] = [
   { key: "deadlines", icon: "calendar" },
+  { key: "scan", icon: "camera" },
   { key: "budget", icon: "chart" },
   { key: "recurring", icon: "repeat" },
   { key: "documents", icon: "file" },
@@ -239,6 +240,7 @@ function PlanCard({
       text: l.aiLettersPerMonth > 0 ? t("limit.aiLetters", { n: l.aiLettersPerMonth }) : t("limit.aiLetters.none"),
       included: l.aiLettersPerMonth > 0,
     },
+    { text: t("limit.scans", { n: l.scansPerMonth }), included: true },
     { text: many(l.fiscalPerMonth, "limit.fiscal", "limit.fiscal.many"), included: true },
     {
       text: l.spaces === 0 ? t("limit.spaces.none") : l.spaces === 1 ? t("limit.spaces.one") : t("limit.spaces.many", { n: l.spaces }),

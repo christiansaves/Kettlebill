@@ -53,6 +53,7 @@ export interface Transaction {
   label: string;
   occurred_on: string;
   tax_deductible: boolean;
+  document_id: string | null;
   created_by: string | null;
   created_at: string;
 }

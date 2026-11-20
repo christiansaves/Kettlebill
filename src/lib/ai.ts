@@ -17,7 +17,7 @@ const PRICES: Record<string, [number, number]> = {
   "claude-haiku-4-5-20251001": [1, 5],
 };
 
-export type AiFeature = "fiscal" | "letter" | "translate";
+export type AiFeature = "fiscal" | "letter" | "translate" | "scan";
 
 export class AiError extends Error {
   constructor(
@@ -85,6 +85,8 @@ export async function askJson<T>(opts: {
   prompt: string;
   schema: Record<string, unknown>;
   maxTokens?: number;
+  /** Images jointes (ex. photo d'un reçu), en base64 sans préfixe data:. */
+  images?: { mediaType: "image/jpeg" | "image/png" | "image/webp" | "image/gif"; base64: string }[];
 }): Promise<T> {
   const model = opts.model ?? MODELS.smart;
   try {
@@ -92,7 +94,20 @@ export async function askJson<T>(opts: {
       model,
       max_tokens: opts.maxTokens ?? 4000,
       system: opts.system,
-      messages: [{ role: "user", content: opts.prompt }],
+      messages: [
+        {
+          role: "user",
+          content: opts.images?.length
+            ? [
+                ...opts.images.map((img) => ({
+                  type: "image" as const,
+                  source: { type: "base64" as const, media_type: img.mediaType, data: img.base64 },
+                })),
+                { type: "text" as const, text: opts.prompt },
+              ]
+            : opts.prompt,
+        },
+      ],
       output_config: { format: { type: "json_schema", schema: opts.schema } },
     });
     await logUsage(opts.userId, opts.feature, model, res.usage);

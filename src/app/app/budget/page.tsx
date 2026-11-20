@@ -96,7 +96,16 @@ export default async function BudgetPage({ searchParams }: PageProps<"/app/budge
 
   return (
     <>
-      <PageHeader title={t("title")} description={t("description")} />
+      <PageHeader
+        title={t("title")}
+        description={t("description")}
+        actions={
+          <ButtonLink href="/app/scanner" variant="secondary">
+            <Icon name="camera" size={18} />
+            {tc("nav.scan")}
+          </ButtonLink>
+        }
+      />
 
       <nav aria-label={t("month.nav")} className="mb-5 flex flex-wrap items-center gap-2">
         <Link href={`/app/budget?m=${prev}`} className="flex size-10 items-center justify-center rounded-xl border border-line bg-surface hover:bg-surface-2" aria-label={t("month.prev")}>

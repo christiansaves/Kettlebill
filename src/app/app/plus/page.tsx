@@ -7,6 +7,7 @@ import { signOut } from "../actions";
 export default async function MorePage() {
   const t = await getT("common");
   const links: { href: string; label: string; icon: IconName }[] = [
+    { href: "/app/abonnements", label: t("nav.recurring"), icon: "repeat" },
     { href: "/app/documents", label: t("nav.documents"), icon: "file" },
     { href: "/app/lettres", label: t("nav.letters"), icon: "mail" },
     { href: "/app/fiscalite", label: t("nav.fiscal"), icon: "percent" },

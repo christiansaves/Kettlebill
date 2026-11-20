@@ -86,6 +86,7 @@ export default async function Dashboard() {
   const plural = new Intl.PluralRules(ctx.locale);
 
   const quick: { href: string; label: string; icon: IconName }[] = [
+    { href: "/app/scanner", label: tc("nav.scan"), icon: "camera" },
     { href: "/app/echeances", label: t("quick.deadline"), icon: "calendar" },
     { href: "/app/budget#ajouter", label: t("quick.transaction"), icon: "wallet" },
     { href: "/app/abonnements", label: t("quick.subscription"), icon: "repeat" },

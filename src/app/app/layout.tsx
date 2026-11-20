@@ -23,10 +23,11 @@ export default async function AppLayout({ children }: LayoutProps<"/app">) {
   const main: NavItem[] = [
     { href: "/app", label: t("nav.home"), icon: "home" },
     { href: "/app/echeances", label: t("nav.deadlines"), icon: "calendar", badge: dueSoon ?? 0 },
+    { href: "/app/scanner", label: t("nav.scan"), icon: "camera" },
     { href: "/app/budget", label: t("nav.budget"), icon: "wallet" },
-    { href: "/app/abonnements", label: t("nav.recurring"), icon: "repeat" },
   ];
   const more: NavItem[] = [
+    { href: "/app/abonnements", label: t("nav.recurring"), icon: "repeat" },
     { href: "/app/documents", label: t("nav.documents"), icon: "file" },
     { href: "/app/lettres", label: t("nav.letters"), icon: "mail" },
     { href: "/app/fiscalite", label: t("nav.fiscal"), icon: "percent" },

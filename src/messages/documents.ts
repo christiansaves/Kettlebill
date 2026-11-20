@@ -75,6 +75,7 @@ const fr = {
   "cat.warranty": "Garanties",
   "cat.contract": "Contrats",
   "cat.bank": "Banque",
+  "cat.receipt": "Reçus et factures",
   "cat.other": "Autre",
 
   "privacy": "Tes fichiers sont privés : seuls les membres de cet espace peuvent les voir. Les liens de téléchargement expirent après 60 secondes.",
@@ -155,6 +156,7 @@ const en: Partial<Record<keyof typeof fr, string>> = {
   "cat.warranty": "Warranties",
   "cat.contract": "Contracts",
   "cat.bank": "Banking",
+  "cat.receipt": "Receipts & bills",
   "cat.other": "Other",
 
   "privacy": "Your files are private: only members of this space can see them. Download links expire after 60 seconds.",

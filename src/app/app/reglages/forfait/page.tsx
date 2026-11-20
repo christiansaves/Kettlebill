@@ -47,6 +47,7 @@ function featuresFor(t: T, l: PlanLimits): string[] {
     countKey(t, "feature.letters", l.lettersPerMonth),
     countKey(t, "feature.fiscal", l.fiscalPerMonth),
     countKey(t, "feature.aiLetters", l.aiLettersPerMonth, { none: true }),
+    countKey(t, "feature.scans", l.scansPerMonth, { none: true }),
     countKey(t, "feature.spaces", l.spaces, { none: true }),
     t(l.membersPerSpace > 1 ? "feature.members.other" : "feature.members.one", { n: l.membersPerSpace }),
   ];
@@ -103,11 +104,15 @@ export default async function ForfaitPage({ searchParams }: PageProps<"/app/regl
   ]);
 
   // Les compteurs IA passent par le client « service » : on les masque si la clé n'est pas configurée.
-  let ai: { fiscal: number; letters: number } | null = null;
+  let ai: { fiscal: number; letters: number; scans: number } | null = null;
   if (process.env.SUPABASE_SECRET_KEY) {
     try {
-      const [fiscal, letters] = await Promise.all([usageThisMonth(ctx.user.id, "fiscal"), usageThisMonth(ctx.user.id, "letter")]);
-      ai = { fiscal, letters };
+      const [fiscal, letters, scans] = await Promise.all([
+        usageThisMonth(ctx.user.id, "fiscal"),
+        usageThisMonth(ctx.user.id, "letter"),
+        usageThisMonth(ctx.user.id, "scan"),
+      ]);
+      ai = { fiscal, letters, scans };
     } catch (e) {
       console.error("[billing] usageThisMonth", e);
     }
@@ -232,6 +237,7 @@ export default async function ForfaitPage({ searchParams }: PageProps<"/app/regl
             <>
               <Meter t={t} locale={locale} label={t("usage.fiscal")} used={ai.fiscal} max={ctx.limits.fiscalPerMonth} />
               <Meter t={t} locale={locale} label={t("usage.aiLetters")} used={ai.letters} max={ctx.limits.aiLettersPerMonth} />
+              <Meter t={t} locale={locale} label={t("usage.scans")} used={ai.scans} max={ctx.limits.scansPerMonth} />
             </>
           ) : null}
           <Meter t={t} locale={locale} label={t("usage.spaces")} used={extraSpaces} max={ctx.limits.spaces} />

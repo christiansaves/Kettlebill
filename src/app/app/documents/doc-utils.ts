@@ -10,6 +10,7 @@ export const DOC_CATEGORIES = [
   "warranty",
   "contract",
   "bank",
+  "receipt",
   "other",
 ] as const;
 export type DocCategory = (typeof DOC_CATEGORIES)[number];

@@ -13,6 +13,7 @@ import reports from "./reports";
 import settings from "./settings";
 import billing from "./billing";
 import legal from "./legal";
+import scan from "./scan";
 
 export const NAMESPACES = {
   common,
@@ -29,6 +30,7 @@ export const NAMESPACES = {
   settings,
   billing,
   legal,
+  scan,
 };
 
 export type Namespace = keyof typeof NAMESPACES;

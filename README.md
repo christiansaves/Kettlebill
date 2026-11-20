@@ -35,7 +35,8 @@ Au 15 novembre 2026, aucun des deux n'était enregistré.
 
 ### 2. Supabase (comptes + base de données + fichiers)
 1. Crée un compte sur supabase.com → **New project** → région **Canada (Central)** si offerte, sinon US East.
-2. Menu **SQL Editor** → colle tout le fichier `supabase/migrations/0001_init.sql` → **Run**.
+2. Menu **SQL Editor** → colle le fichier `supabase/migrations/0001_init.sql` → **Run**, puis fais de même avec
+   `supabase/migrations/0002_scan.sql` (scanner de reçus).
 3. Menu **Authentication → URL Configuration** :
    - *Site URL* : `https://kettlebill.com`
    - *Redirect URLs* : `https://kettlebill.com/auth/callback`, `http://localhost:3000/auth/callback`
